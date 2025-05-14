@@ -59,8 +59,12 @@ class PuzzleState:
         :param goal: Trạng thái đích
         :return: Khoảng cách Manhattan
         """
-        # TODO: Implement Manhattan distance calculation
-        return 0  # Tạm thời trả về 0
+        distance = 0
+        for num in range(1, self.size * self.size):
+            pos_current = np.argwhere(self.state == num)[0]
+            pos_goal = np.argwhere(goal.state == num)[0]
+            distance += abs(pos_current[0] - pos_goal[0]) + abs(pos_current[1] - pos_goal[1])
+        return distance
     
     def __eq__(self, other: object) -> bool:
         if not isinstance(other, PuzzleState):

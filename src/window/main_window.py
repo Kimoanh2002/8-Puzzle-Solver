@@ -28,7 +28,7 @@ import numpy as np
 class MainWindow:
     def __init__(self):
         self.window = tk.Tk()
-        self.window.title("8/15-Puzzle Solver")
+        self.window.title("8 Puzzle Solver")
         self.window.geometry("440x620")
         
         self.solution_path = []
@@ -114,7 +114,7 @@ class MainWindow:
             return
         n = len(state_list)
         if n not in [9, 16]:
-            messagebox.showerror("Lỗi", "Chỉ hỗ trợ 8-puzzle (9 số) hoặc 15-puzzle (16 số)!")
+            messagebox.showerror("Lỗi", "Chỉ hỗ trợ 8-puzzle (9 số)!")
             return
         size = int(n ** 0.5)
         try:

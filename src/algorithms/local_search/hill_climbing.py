@@ -3,29 +3,32 @@ import random
 from src.utils.puzzle import PuzzleState
 from types import SimpleNamespace
 
-def hill_climbing(initial_state: PuzzleState, goal_state: PuzzleState, max_steps=1000, restarts=20):
-    best_result = None
-    for _ in range(restarts):
-        current = initial_state
-        path = [current]
-        steps = 0
-        while steps < max_steps:
-            if current == goal_state:
-                elapsed_time = time.perf_counter()
-                return SimpleNamespace(
-                    steps=len(path) - 1,
-                    path=path,
-                    elapsed_time=elapsed_time
-                )
-            neighbors = current.get_neighbors()
-            if not neighbors:
-                break
-            min_h = min(s.manhattan_distance(goal_state) for s in neighbors)
-            best_neighbors = [s for s in neighbors if s.manhattan_distance(goal_state) == min_h]
-            if min_h >= current.manhattan_distance(goal_state):
-                break
-            next_state = random.choice(best_neighbors)
-            current = next_state
-            path.append(current)
-            steps += 1
+def hill_climbing(initial_state: PuzzleState, goal_state: PuzzleState, max_steps=1000):
+    current = initial_state
+    path = [current]
+    nodes_explored = 0
+    visited_states = set()
+    depth = 0
+    max_memory = 0
+    while depth < max_steps:
+        nodes_explored += 1
+        state_tuple = tuple(map(tuple, current.board))
+        if state_tuple in visited_states:
+            break
+        visited_states.add(state_tuple)
+        max_memory = max(max_memory, len(visited_states))
+        if current == goal_state:
+            return path, nodes_explored, len(path), max_memory
+        best_child = None
+        best_h = current.manhattan_distance(goal_state)
+        for neighbor in current.get_neighbors():
+            h_child = neighbor.manhattan_distance(goal_state)
+            if h_child < best_h:
+                best_h = h_child
+                best_child = neighbor
+        if best_child is None:
+            break
+        current = best_child
+        path.append(current)
+        depth += 1
     return None
