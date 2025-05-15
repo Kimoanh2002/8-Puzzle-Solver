@@ -117,7 +117,7 @@
   - **Nhược điểm:** Thời gian chạy không ổn định, không đảm bảo tối ưu.
   - **Phù hợp:** Khi muốn tránh kẹt ở cực trị địa phương.
   - **Nhanh nhất:** Không.
-![]
+![Simulated Annealing GIF](video/simulated_annealing.gif)
 
 - **Genetic Algorithm**: Mô phỏng tiến hóa tự nhiên, sử dụng quần thể trạng thái, lai ghép và đột biến để tìm lời giải.
   
@@ -135,7 +135,7 @@
   - **Nhược điểm:** Không đảm bảo tối ưu.
   - **Phù hợp:** Khi cần giải pháp nhanh, bộ nhớ hạn chế.
   - **Nhanh nhất:** Có thể.
-
+![Beam Search GIF](video/beam_search.gif)
 
 ### 4. Môi trường phức tạp (Complex Environments)
 - **Partial Observation Search**: Tìm kiếm trong môi trường mà trạng thái không được quan sát đầy đủ, cần suy luận trạng thái thực.
@@ -152,7 +152,7 @@
   - **Ưu điểm:** Mô phỏng môi trường không xác định.
   - **Nhược điểm:** Không phù hợp cho 8-puzzle tiêu chuẩn.
   - **Phù hợp:** Nghiên cứu nâng cao.
-
+![Nondeterministic Search GIF](video/Nondeterministic%20Search.gif)
 
 - **Belief-State Search**: Tìm kiếm trên không gian trạng thái niềm tin (tập hợp các trạng thái có thể), phù hợp cho môi trường không xác định.
   
@@ -194,7 +194,7 @@
   - **Ưu điểm:** Có thể học giải pháp tối ưu qua nhiều lần thử.
   - **Nhược điểm:** Cần nhiều thời gian huấn luyện, không hiệu quả ngay với 8-puzzle nhỏ.
   - **Phù hợp:** Khi muốn thử nghiệm học máy.
-![Q Learning MOV](video/)
+![Q Learning MOV](video/q_learning.gif)
 
 - **DQN (Deep Q-Network)**: Mở rộng Q-Learning với mạng nơ-ron sâu để xấp xỉ hàm Q, giải quyết không gian trạng thái lớn.
   
@@ -202,7 +202,7 @@
   - **Ưu điểm:** Áp dụng cho không gian trạng thái lớn.
   - **Nhược điểm:** Quá phức tạp cho 8-puzzle, cần nhiều tài nguyên.
   - **Phù hợp:** Nghiên cứu học sâu.
-
+![DQN GIF](video/DQN.gif)
 
 - **SARSA**: Tương tự Q-Learning nhưng cập nhật giá trị dựa trên hành động thực tế đã chọn, phù hợp cho các bài toán cần chính sách an toàn.
   
