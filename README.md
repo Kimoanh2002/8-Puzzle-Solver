@@ -25,7 +25,7 @@
   - **Phù hợp:** Rất tốt cho 8-puzzle với độ sâu lời giải vừa phải.
   - **Nhanh nhất:** Không phải, tốc độ trung bình, nhưng đảm bảo tối ưu.
 
-  ![BFS MOV](video/BFS.mov)
+  ![BFS MOV](video/BFS.gif)
 
 - **DFS (Depth-First Search)**: Tìm kiếm theo chiều sâu, đi sâu vào nhánh hiện tại trước khi quay lại, có thể không tối ưu và dễ gặp lặp vô hạn nếu không kiểm soát.
   
