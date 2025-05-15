@@ -34,7 +34,7 @@
   - **Nhược điểm:** Không đảm bảo tìm được lời giải ngắn nhất, dễ bị lặp hoặc đi vào nhánh sâu không có lời giải.
   - **Phù hợp:** Không khuyến khích dùng cho 8-puzzle nếu cần lời giải tối ưu.
   - **Nhanh nhất:** Có thể nhanh nếu may mắn, nhưng thường không ổn định.
-  ![DFS MOV](video/DFS.mov)
+  ![DFS MOV](video/DFS.gif)
 
 - **UCS (Uniform Cost Search)**: Tìm kiếm theo chi phí đều, luôn mở rộng trạng thái có tổng chi phí nhỏ nhất từ đầu đến hiện tại, đảm bảo tối ưu nếu chi phí dương.
   
@@ -43,7 +43,7 @@
   - **Nhược điểm:** Tốn bộ nhớ lớn như BFS.
   - **Phù hợp:** Tốt cho 8-puzzle, không khác biệt nhiều so với BFS nếu mọi bước có chi phí như nhau.
   - **Nhanh nhất:** Không.
-  ![UCS MOV](video/UCS.MOV)
+  ![UCS MOV](video/UCS.gif)
 
 - **IDS (Iterative Deepening Search)**: Kết hợp DFS và BFS, lặp lại DFS với giới hạn độ sâu tăng dần, vừa tiết kiệm bộ nhớ vừa đảm bảo tìm được lời giải ngắn nhất.
   
@@ -52,7 +52,7 @@
   - **Nhược điểm:** Thời gian chạy lâu hơn do phải lặp lại nhiều lần.
   - **Phù hợp:** Tốt cho 8-puzzle khi bộ nhớ hạn chế.
   - **Nhanh nhất:** Không.
-  ![IDS MOV](video/IDS.MOV)
+  ![IDS MOV](video/IDS.gif)
 
 ### 2. Tìm kiếm có thông tin (Informed Search)
 - **Greedy BFS (Greedy Best-First Search)**: Chọn mở rộng trạng thái có giá trị heuristic nhỏ nhất, thường nhanh nhưng không đảm bảo tối ưu.
@@ -62,7 +62,7 @@
   - **Nhược điểm:** Không đảm bảo tìm được lời giải ngắn nhất, dễ bị kẹt ở trạng thái không tối ưu.
   - **Phù hợp:** Khi cần lời giải nhanh, không quan trọng tối ưu.
   - **Nhanh nhất:** Có thể là một trong những thuật toán nhanh nhất.
-  ![Greedy BFS MOV](video/Greedy_BFS.MOV)
+  ![Greedy BFS MOV](video/Greedy_BFS.gif)
 
 - **A\***: Kết hợp chi phí thực tế và heuristic (f(n) = g(n) + h(n)), đảm bảo tối ưu nếu heuristic chấp nhận được.
   
@@ -71,7 +71,7 @@
   - **Nhược điểm:** Vẫn tốn bộ nhớ lớn nếu không gian trạng thái lớn.
   - **Phù hợp:** Thuật toán mạnh nhất, phù hợp nhất cho 8-puzzle.
   - **Nhanh nhất:** Thường là nhanh nhất và tối ưu nhất nếu heuristic tốt.
-  ![A* MOV](video/A*.MOV)
+  ![A* MOV](video/A_.gif)
 
 - **IDA\***: Lặp lại A* với ngưỡng chi phí tăng dần, tiết kiệm bộ nhớ hơn A* truyền thống.
   
@@ -80,7 +80,7 @@
   - **Nhược điểm:** Có thể chạy lâu hơn A* do phải lặp lại nhiều lần.
   - **Phù hợp:** Khi bộ nhớ hạn chế, vẫn muốn lời giải tối ưu.
   - **Nhanh nhất:** Không, nhưng cân bằng giữa bộ nhớ và tối ưu.
-![IDA* MOV](video/IDA*.MOV)
+![IDA* MOV](video/IDA*.gif)
 
 ### 3. Tìm kiếm cục bộ (Local Search)
 - **Hill Climbing**: Luôn chọn trạng thái lân cận tốt hơn hiện tại, dễ mắc kẹt tại cực trị địa phương.
@@ -90,7 +90,7 @@
   - **Nhược điểm:** Dễ bị kẹt ở trạng thái không phải lời giải.
   - **Phù hợp:** Không khuyến khích cho 8-puzzle nếu cần lời giải chắc chắn.
   - **Nhanh nhất:** Có thể rất nhanh, nhưng không ổn định.
-  
+  ![Hill_Climbing GIF](video/hill_climbing.gif)
 
 - **Steepest Hill Climbing**: Xem xét tất cả lân cận và chọn tốt nhất, giảm khả năng mắc kẹt hơn so với hill climbing cơ bản.
   
@@ -99,7 +99,7 @@
   - **Nhược điểm:** Vẫn có thể kẹt ở cực trị địa phương.
   - **Phù hợp:** Khi cần giải pháp nhanh, không cần tối ưu.
   - **Nhanh nhất:** Có thể.
-
+![Steepest_HC](video/steepest_hill_climbing.gif)
 
 - **Stochastic Hill Climbing**: Chọn ngẫu nhiên một lân cận tốt hơn, giúp tránh lặp lại các trạng thái cũ.
   
@@ -108,7 +108,7 @@
   - **Nhược điểm:** Không đảm bảo tìm được lời giải.
   - **Phù hợp:** Khi cần đa dạng lời giải, không cần tối ưu.
   - **Nhanh nhất:** Có thể.
-
+![Stochastic_HC](video/stochastic_hill_climbing.gif)
 
 - **Simulated Annealing**: Cho phép chọn trạng thái kém hơn với xác suất giảm dần, giúp thoát khỏi cực trị địa phương.
   
@@ -117,7 +117,7 @@
   - **Nhược điểm:** Thời gian chạy không ổn định, không đảm bảo tối ưu.
   - **Phù hợp:** Khi muốn tránh kẹt ở cực trị địa phương.
   - **Nhanh nhất:** Không.
-
+![]
 
 - **Genetic Algorithm**: Mô phỏng tiến hóa tự nhiên, sử dụng quần thể trạng thái, lai ghép và đột biến để tìm lời giải.
   
@@ -169,7 +169,7 @@
   - **Ưu điểm:** Đơn giản, dễ cài đặt.
   - **Nhược điểm:** Hiệu quả thấp với không gian trạng thái lớn.
   - **Phù hợp:** Không tối ưu cho 8-puzzle, nhưng tốt cho các bài toán ràng buộc khác.
-![Backtracking MOV](video/Backtracking.MOV)
+![Backtracking MOV](video/Backtracking.gif)
 
 - **Backtracking FC (Forward Checking)**: Kết hợp kiểm tra trước để loại bỏ giá trị không hợp lệ, tăng hiệu quả so với backtracking cơ bản.
   
@@ -177,7 +177,7 @@
   - **Ưu điểm:** Hiệu quả hơn backtracking cơ bản.
   - **Nhược điểm:** Vẫn không tối ưu cho 8-puzzle.
   - **Phù hợp:** Bài toán ràng buộc.
-![Backtracking FC MOV](video/Backtracking_FC.MOV)
+![Backtracking FC MOV](video/Backtracking_FC.gif)
 
 - **Min-Conflicts**: Bắt đầu từ trạng thái ngẫu nhiên và liên tục sửa các biến gây xung đột, phù hợp cho bài toán lớn.
   
@@ -210,7 +210,7 @@
   - **Ưu điểm:** Chính sách an toàn hơn Q-Learning.
   - **Nhược điểm:** Cần nhiều thời gian huấn luyện.
   - **Phù hợp:** Nghiên cứu học máy.
-![SARSA MOV](video/SARSA.MOV)
+![SARSA MOV](video/SARSA.gif)
 
 #
 
