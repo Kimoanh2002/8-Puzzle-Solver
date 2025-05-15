@@ -25,6 +25,7 @@
   - **Phù hợp:** Rất tốt cho 8-puzzle với độ sâu lời giải vừa phải.
   - **Nhanh nhất:** Không phải, tốc độ trung bình, nhưng đảm bảo tối ưu.
 
+  ![BFS MOV](video/BFS.mov)
 
 - **DFS (Depth-First Search)**: Tìm kiếm theo chiều sâu, đi sâu vào nhánh hiện tại trước khi quay lại, có thể không tối ưu và dễ gặp lặp vô hạn nếu không kiểm soát.
   
@@ -33,7 +34,7 @@
   - **Nhược điểm:** Không đảm bảo tìm được lời giải ngắn nhất, dễ bị lặp hoặc đi vào nhánh sâu không có lời giải.
   - **Phù hợp:** Không khuyến khích dùng cho 8-puzzle nếu cần lời giải tối ưu.
   - **Nhanh nhất:** Có thể nhanh nếu may mắn, nhưng thường không ổn định.
-
+  ![DFS MOV](video/DFS.mov)
 
 - **UCS (Uniform Cost Search)**: Tìm kiếm theo chi phí đều, luôn mở rộng trạng thái có tổng chi phí nhỏ nhất từ đầu đến hiện tại, đảm bảo tối ưu nếu chi phí dương.
   
@@ -42,7 +43,7 @@
   - **Nhược điểm:** Tốn bộ nhớ lớn như BFS.
   - **Phù hợp:** Tốt cho 8-puzzle, không khác biệt nhiều so với BFS nếu mọi bước có chi phí như nhau.
   - **Nhanh nhất:** Không.
-
+  ![UCS MOV](video/UCS.MOV)
 
 - **IDS (Iterative Deepening Search)**: Kết hợp DFS và BFS, lặp lại DFS với giới hạn độ sâu tăng dần, vừa tiết kiệm bộ nhớ vừa đảm bảo tìm được lời giải ngắn nhất.
   
@@ -51,7 +52,7 @@
   - **Nhược điểm:** Thời gian chạy lâu hơn do phải lặp lại nhiều lần.
   - **Phù hợp:** Tốt cho 8-puzzle khi bộ nhớ hạn chế.
   - **Nhanh nhất:** Không.
-
+  ![IDS MOV](video/IDS.MOV)
 
 ### 2. Tìm kiếm có thông tin (Informed Search)
 - **Greedy BFS (Greedy Best-First Search)**: Chọn mở rộng trạng thái có giá trị heuristic nhỏ nhất, thường nhanh nhưng không đảm bảo tối ưu.
@@ -61,7 +62,7 @@
   - **Nhược điểm:** Không đảm bảo tìm được lời giải ngắn nhất, dễ bị kẹt ở trạng thái không tối ưu.
   - **Phù hợp:** Khi cần lời giải nhanh, không quan trọng tối ưu.
   - **Nhanh nhất:** Có thể là một trong những thuật toán nhanh nhất.
-
+  ![Greedy BFS MOV](video/Greedy_BFS.MOV)
 
 - **A\***: Kết hợp chi phí thực tế và heuristic (f(n) = g(n) + h(n)), đảm bảo tối ưu nếu heuristic chấp nhận được.
   
@@ -70,7 +71,7 @@
   - **Nhược điểm:** Vẫn tốn bộ nhớ lớn nếu không gian trạng thái lớn.
   - **Phù hợp:** Thuật toán mạnh nhất, phù hợp nhất cho 8-puzzle.
   - **Nhanh nhất:** Thường là nhanh nhất và tối ưu nhất nếu heuristic tốt.
-
+  ![A* MOV](video/A*.MOV)
 
 - **IDA\***: Lặp lại A* với ngưỡng chi phí tăng dần, tiết kiệm bộ nhớ hơn A* truyền thống.
   
@@ -79,7 +80,7 @@
   - **Nhược điểm:** Có thể chạy lâu hơn A* do phải lặp lại nhiều lần.
   - **Phù hợp:** Khi bộ nhớ hạn chế, vẫn muốn lời giải tối ưu.
   - **Nhanh nhất:** Không, nhưng cân bằng giữa bộ nhớ và tối ưu.
-
+![IDA* MOV](video/IDA*.MOV)
 
 ### 3. Tìm kiếm cục bộ (Local Search)
 - **Hill Climbing**: Luôn chọn trạng thái lân cận tốt hơn hiện tại, dễ mắc kẹt tại cực trị địa phương.
@@ -89,7 +90,7 @@
   - **Nhược điểm:** Dễ bị kẹt ở trạng thái không phải lời giải.
   - **Phù hợp:** Không khuyến khích cho 8-puzzle nếu cần lời giải chắc chắn.
   - **Nhanh nhất:** Có thể rất nhanh, nhưng không ổn định.
-
+  
 
 - **Steepest Hill Climbing**: Xem xét tất cả lân cận và chọn tốt nhất, giảm khả năng mắc kẹt hơn so với hill climbing cơ bản.
   
@@ -168,7 +169,7 @@
   - **Ưu điểm:** Đơn giản, dễ cài đặt.
   - **Nhược điểm:** Hiệu quả thấp với không gian trạng thái lớn.
   - **Phù hợp:** Không tối ưu cho 8-puzzle, nhưng tốt cho các bài toán ràng buộc khác.
-
+![Backtracking MOV](video/Backtracking.MOV)
 
 - **Backtracking FC (Forward Checking)**: Kết hợp kiểm tra trước để loại bỏ giá trị không hợp lệ, tăng hiệu quả so với backtracking cơ bản.
   
@@ -176,7 +177,7 @@
   - **Ưu điểm:** Hiệu quả hơn backtracking cơ bản.
   - **Nhược điểm:** Vẫn không tối ưu cho 8-puzzle.
   - **Phù hợp:** Bài toán ràng buộc.
-
+![Backtracking FC MOV](video/Backtracking_FC.MOV)
 
 - **Min-Conflicts**: Bắt đầu từ trạng thái ngẫu nhiên và liên tục sửa các biến gây xung đột, phù hợp cho bài toán lớn.
   
@@ -193,7 +194,7 @@
   - **Ưu điểm:** Có thể học giải pháp tối ưu qua nhiều lần thử.
   - **Nhược điểm:** Cần nhiều thời gian huấn luyện, không hiệu quả ngay với 8-puzzle nhỏ.
   - **Phù hợp:** Khi muốn thử nghiệm học máy.
-
+![Q Learning MOV](video/)
 
 - **DQN (Deep Q-Network)**: Mở rộng Q-Learning với mạng nơ-ron sâu để xấp xỉ hàm Q, giải quyết không gian trạng thái lớn.
   
@@ -209,7 +210,7 @@
   - **Ưu điểm:** Chính sách an toàn hơn Q-Learning.
   - **Nhược điểm:** Cần nhiều thời gian huấn luyện.
   - **Phù hợp:** Nghiên cứu học máy.
-
+![SARSA MOV](video/SARSA.MOV)
 
 #
 
