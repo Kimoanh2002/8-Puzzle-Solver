@@ -5,61 +5,74 @@ from types import SimpleNamespace
 import copy
 import numpy as np
 
-def genetic_algorithm(initial_state: PuzzleState, goal_state: PuzzleState, population_size=100, generations=500, mutation_rate=0.1, tournament_size=5):
-    def fitness(state):
-        # Fitness càng nhỏ càng tốt (khoảng cách Manhattan)
-        return state.manhattan_distance(goal_state)
+def genetic_algorithm(initial_state: PuzzleState, goal_state: PuzzleState, population_size=100, generations=500, mutation_rate=0.1, tournament_size=5, max_path_length=50):
+    if not initial_state.is_solvable():
+        return SimpleNamespace(
+            solved=False,
+            steps=None,
+            path=None,
+            elapsed_time=0.0
+        )
 
-    def random_state():
-        # Sinh trạng thái ngẫu nhiên bằng cách thực hiện nhiều bước đi hợp lệ từ initial_state
+    def fitness(path):
+        # Fitness càng nhỏ càng tốt (khoảng cách Manhattan của trạng thái cuối)
+        return path[-1].manhattan_distance(goal_state) + len(path)  # Ưu tiên path ngắn hơn nếu cùng heuristic
+
+    def random_path():
+        # Sinh path ngẫu nhiên từ initial_state
         state = copy.deepcopy(initial_state)
-        for _ in range(random.randint(10, 50)):
+        path = [state]
+        for _ in range(random.randint(10, max_path_length)):
             neighbors = state.get_neighbors()
-            state = random.choice(neighbors)
-        return state
+            next_state = random.choice(neighbors)
+            if next_state in path:
+                break  # tránh lặp vô hạn
+            path.append(next_state)
+            state = next_state
+            if state == goal_state:
+                break
+        return path
 
-    def crossover(parent1, parent2):
-        # Lai ghép: chọn ngẫu nhiên một nửa hàng từ mỗi cha mẹ
-        size = parent1.size
-        child_state = parent1.state.copy()
-        row_split = random.randint(1, size-1)
-        child_state[:row_split, :] = parent1.state[:row_split, :]
-        child_state[row_split:, :] = parent2.state[row_split:, :]
-        # Đảm bảo hợp lệ: nếu trùng số, sửa lại bằng số còn thiếu
-        flat = child_state.flatten()
-        unique, counts = np.unique(flat, return_counts=True)
-        missing = set(range(size*size)) - set(flat)
-        for val, count in zip(unique, counts):
-            if count > 1:
-                idxs = np.where(flat == val)[0][1:]
-                for idx in idxs:
-                    flat[idx] = missing.pop()
-        child_state = flat.reshape((size, size))
-        return PuzzleState(child_state.tolist())
+    def crossover(path1, path2):
+        # Lai ghép hai path tại điểm cắt ngẫu nhiên
+        cut1 = random.randint(1, len(path1)-1) if len(path1) > 1 else 1
+        cut2 = random.randint(1, len(path2)-1) if len(path2) > 1 else 1
+        new_path = path1[:cut1]
+        state = new_path[-1]
+        for s in path2[cut2:]:
+            if s in new_path:
+                break
+            # chỉ thêm neighbor hợp lệ
+            if s in state.get_neighbors():
+                new_path.append(s)
+                state = s
+            else:
+                break
+            if state == goal_state:
+                break
+        return new_path
 
-    def mutate(state):
-        # Đột biến: thực hiện một bước đi hợp lệ ngẫu nhiên
-        neighbors = state.get_neighbors()
+    def mutate(path):
+        # Đột biến: thêm một bước đi hợp lệ vào cuối path
+        state = path[-1]
+        neighbors = [n for n in state.get_neighbors() if n not in path]
         if neighbors:
-            return random.choice(neighbors)
-        return state
+            path = path + [random.choice(neighbors)]
+        return path
 
     # Khởi tạo quần thể
-    population = [random_state() for _ in range(population_size)]
-    best_path = None
-    best_fitness = float('inf')
+    population = [random_path() for _ in range(population_size)]
     start_time = time.perf_counter()
     for gen in range(generations):
         # Đánh giá fitness
         population.sort(key=fitness)
-        if fitness(population[0]) < best_fitness:
-            best_fitness = fitness(population[0])
-            best_path = [population[0]]
-        if population[0] == goal_state:
+        best_path = population[0]
+        if best_path[-1] == goal_state:
             elapsed_time = time.perf_counter() - start_time
             return SimpleNamespace(
-                steps=0,
-                path=[population[0]],
+                solved=True,
+                steps=len(best_path)-1,
+                path=best_path,
                 elapsed_time=elapsed_time
             )
         # Chọn lọc (tournament selection)
@@ -75,4 +88,10 @@ def genetic_algorithm(initial_state: PuzzleState, goal_state: PuzzleState, popul
             new_population.append(child)
         population = new_population
     # Nếu không tìm được lời giải
-    return None
+    elapsed_time = time.perf_counter() - start_time
+    return SimpleNamespace(
+        solved=False,
+        steps=None,
+        path=None,
+        elapsed_time=elapsed_time
+    )
